@@ -1,101 +1,172 @@
-import Image from "next/image";
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Play, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+
+const slides = [
+  {
+    title: "ENJOY YOUR SHOWS",
+    subtitle: "THANKS FOR ALL YOUR SUPPORT",
+    image: "https://plus.unsplash.com/premium_photo-1661299366011-bb9f86212bdb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    title: "KEEP IT LOCKED",
+    subtitle: "YOUR FAVORITE AISAT",
+    image: "https://plus.unsplash.com/premium_photo-1678566111481-8e275550b700?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8VGVjaHxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    title: "LIVE MUSIC",
+    subtitle: "DISCOVER NEW ARTISTS",
+    image: "https://plus.unsplash.com/premium_photo-1683129651802-1c7ba429a137?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
+]
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <main className="min-h-screen">
+      {/* Marquee Banner */}
+      <div className="overflow-hidden bg-black py-2 border-b border-gray-800">
+        <motion.div
+          animate={{ x: [0, -1000] }}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 20,
+            ease: "linear"
+          }}
+          className="whitespace-nowrap text-xl"
+        >
+          THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM •  • THARANGHAM • • THARANGHAM • • THARANGHAM •
+        </motion.div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-[350px,1fr] gap-4 p-4">
+        {/* Sidebar */}
+        <div className="space-y-4">
+          {/* Drivetime Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-blue-100 text-black p-4 rounded-lg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <h2 className="text-2xl font-bold">PARTY TIME</h2>
+            <p className="text-lg">5.00PM - 7.00PM</p>
+            <img 
+              src="https://images.unsplash.com/photo-1468359601543-843bfaef291a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D"
+              alt="Vintage Radio"
+              className="w-full h-48 object-cover my-4 rounded"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <button className="w-full bg-black text-white p-3 rounded flex items-center justify-between group">
+              VIEW SHOW
+              <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+            </button>
+          </motion.div>
+
+          {/* Stream Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-red-500 p-4 rounded-lg"
           >
-            Read our docs
-          </a>
+            <h2 className="text-2xl font-bold mb-4">STREAM YOUR SHOW</h2>
+            <div className="relative aspect-video bg-black rounded overflow-hidden">
+              <img 
+                src="https://plus.unsplash.com/premium_photo-1682855222843-0cd0827ed6e3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2hvd3N8ZW58MHx8MHx8fDA%3D"
+                alt="RTR2 Logo"
+                className="w-full h-full object-cover"
+              />
+              <button 
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <motion.div
+                  animate={{ scale: isPlaying ? 0.9 : 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  className="bg-red-500 p-4 rounded-full"
+                >
+                  <Play size={32} />
+                </motion.div>
+              </button>
+            </div>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Main Content */}
+        <div className="relative overflow-hidden rounded-lg bg-gradient-to-b from-neutral-800 to-black">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="relative aspect-[16/9]"
+            >
+              <img
+                src={slides[currentSlide].image || "/placeholder.svg"}
+                alt={slides[currentSlide].title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 p-8 flex flex-col justify-end">
+                <motion.h1 
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  className="text-4xl md:text-6xl font-bold mb-4"
+                >
+                  {slides[currentSlide].title}
+                </motion.h1>
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-xl md:text-2xl"
+                >
+                  {slides[currentSlide].subtitle}
+                </motion.p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Slide Navigation */}
+          <div className="absolute bottom-4 right-4 flex items-center gap-2">
+            <span className="text-sm">{currentSlide + 1}/{slides.length}</span>
+            <button 
+              onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+              className="bg-red-500 p-2 rounded-full hover:bg-red-600 transition-colors"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+              className="bg-red-500 p-2 rounded-full hover:bg-red-600 transition-colors"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
+
+        {/* Happy New Year Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="md:col-span-2 p-4"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          <h2 className="text-3xl font-bold mb-2">CHECK OUT THE SHOWS</h2>
+          <p className="text-gray-400">Keep it locked to THARANGHAM 2025 .</p>
+        </motion.div>
+      </div>
+    </main>
+  )
 }
+
