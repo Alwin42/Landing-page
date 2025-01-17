@@ -46,7 +46,7 @@ export default function Home() {
           }}
           className="whitespace-nowrap text-xl"
         >
-          THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM •  • THARANGHAM • • THARANGHAM • • THARANGHAM •
+          • THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM •  THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM • THARANGHAM •
         </motion.div>
       </div>
 
@@ -57,6 +57,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
             className="bg-blue-100 text-black p-4 rounded-lg"
           >
             <h2 className="text-2xl font-bold">PARTY TIME</h2>
@@ -76,7 +77,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.8 }}
             className="bg-red-500 p-4 rounded-lg"
           >
             <h2 className="text-2xl font-bold mb-4">STREAM YOUR SHOW</h2>
@@ -108,7 +109,7 @@ export default function Home() {
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 6 }}
               exit={{ opacity: 0 }}
               className="relative aspect-[16/9]"
             >
@@ -155,7 +156,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Happy New Year Section */}
+        {}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
